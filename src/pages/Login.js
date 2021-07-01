@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Checkbox } from '@material-ui/core';
 import '../App.css'
 import { SHA256 } from 'crypto-js';
+import axios from 'axios';
 
 function Login() {
     const [userName, setUserName] = useState("");
@@ -80,7 +81,12 @@ function Login() {
                         localStorage.setItem("name", userName);
                     }
                     const encryptedPassword = SHA256(password).toString();
-  
+                    const params = { userName: userName, password: password};
+                        axios.post('http://localhost:8080/api/auth/login', params)
+                        .then(function (response) {
+                            console.log(response.data);
+        
+                        })
                 }}>Log in</Button>
             </div>
             <div class="row" style={{ paddingTop: "0.5em" }}>

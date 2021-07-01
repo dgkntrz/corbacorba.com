@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Checkbox } from '@material-ui/core';
 import '../App.css'
 import { SHA256 } from 'crypto-js';
+import axios from 'axios';
 
 function Login() {
     const [userName, setUserName] = useState("");
@@ -95,7 +96,7 @@ function Login() {
                 }}>Sign up</Button>
             </div>
             <div class="row" style={{ paddingTop: "1em" }}>
-                Have an account? <a href="/signup">Log in!</a>
+                Have an account? <a href="/login">Log in!</a>
             </div>  
         </div>
     );
