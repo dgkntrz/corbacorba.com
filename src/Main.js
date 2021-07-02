@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Signup from './pages/Signup'
+import Mail from './pages/SentMail'
 
 const Main = () => {
     localStorage.setItem("sel",0);
@@ -12,6 +13,7 @@ const Main = () => {
                 <Route exact path='/' component={Home}></Route>
                 <Route exact path='/login' component={Login}></Route>
                 <Route exact path='/signup' component={Signup}></Route>
+                {/*<Route exact path='/mail' component={Mail}></Route>*/}
             </Switch>
         </BrowserRouter>
     );
