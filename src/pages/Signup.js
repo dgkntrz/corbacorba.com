@@ -29,26 +29,28 @@ function Login() {
     const handleClose = () => {
         if (inputRegistrationCode == registrationCode){
             setOpen(false);
-            toast.success("Sign up successful! You will be forwarded to the home page shortly.");
             if (checked){
                 localStorage.setItem("password", password);
                 localStorage.setItem("name", userName);
             }
             const encryptedPassword = SHA256(password).toString();
-            const params = {username: userName, password: encryptedPassword, email: email}
-            axios.post('http://localhost:8080/api/auth/register', {params})
-            .then(function (response) {
-                if (response.data.errorDto) {
-                    // toast.error(response.data.errorDto.description)
-                    console.log("signed up")
-                } else {
-                    // toast.info("giriş başarılı")
-                    console.log("damn")
-                }
-            })
-            setTimeout(() => {
-                history.push("/");
-            }, 5000);
+            try{    
+                const params = {username: userName, password: encryptedPassword, email: email}
+                axios.post('http://localhost:8080/api/auth/register', {params})
+                .then(function (response) {
+                    if (response.data.errorDto) {
+                        toast.error(response.data.errorDto.description);
+                    } else {
+                        toast.success("Sign up successful! You will be forwarded to the home page shortly.");
+                        setTimeout(() => {
+                            history.push("/");
+                        }, 5000);
+                    }
+                })
+                
+            }catch(ex){
+                toast.error("Cannot connect to the servers right now. Please try again later.");
+            }   
         }
         else{
             toast.error("Code you just entered is wrong!");
