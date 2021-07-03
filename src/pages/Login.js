@@ -3,14 +3,14 @@ import {TextField, Button, Checkbox} from '@material-ui/core';
 import '../App.css'
 import {SHA256} from 'crypto-js';
 import axios from 'axios';
-// import {ToastContainer, toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from "react-toastify"
 
 function Login() {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
     const rememberMe = localStorage.getItem("remember");
-
     const [checked, setChecked] = useState(rememberMe == "yes" ? true : false);
     let defaultName = "";
     let defaultPass = "";
@@ -30,10 +30,10 @@ function Login() {
         axios.get('http://localhost:8080/api/auth/login', {params})
             .then(function (response) {
                 if (response.data.errorDto) {
-                    // toast.error(response.data.errorDto.description)
+                    toast.error(response.data.errorDto.description)
                     console.log("giriş başarısız")
                 } else {
-                    // toast.info("giriş başarılı")
+                    toast.info("Successfully logged in")
                     console.log("giriş başarılı")
                 }
             })
@@ -106,6 +106,7 @@ function Login() {
                 </div>
 
             </div>
+            <ToastContainer/>
         </div>
     );
 }
