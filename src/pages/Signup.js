@@ -65,9 +65,12 @@ function Login() {
         const code = makecode(5);
         setRegistrationCode(code);
         const variables = { to_name: userName, code: code, target: email };
-        emailjs.send('corbacorba', Keys.TEMPLATE_ID, variables, Keys.USER_ID).then(res => { console.log("success") });
-        handleClickOpen();
-        
+        try{
+            emailjs.send('corbacorba', Keys.TEMPLATE_ID, variables, Keys.USER_ID).then(res => { console.log("success") });
+            handleClickOpen();
+        }catch(ex){
+            toast.error("Please enter a valid mail address.")
+        }
     }
 
     function makecode(length) {
